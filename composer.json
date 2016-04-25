@@ -1,5 +1,5 @@
 {
-    "name": "mopa/barcode-bundle",
+    "name": "mopa-liip/barcode-bundle",
     "type": "symfony-bundle",
     "description": "Integrates Zend_Barcode and PHP QR Lib to be easily used in symfony2 via twig",
     "keywords": ["barcode", "qr code", "zend", "twig"],
@@ -29,7 +29,7 @@
       "phpunit/phpunit": "~4.6"
     },
     "suggest":  {
-        "avalanche123/imagine-bundle": "dev-master",
+        "liip/imagine-bundle": "1.2.6",
         "zendframework/zend-barcode": "~2.3.7",
         "zendframework/zend-validator": "~2.3.7",
         "zendframework/zend-servicemanager": "~2.3.7"
