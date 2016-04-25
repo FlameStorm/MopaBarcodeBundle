@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Integrates Zend_Barcode and PHP QR Lib to be easily used in symfony2 via twig",
     "keywords": ["barcode", "qr code", "zend", "twig"],
-    "version": "master",
+    "homepage": "https://github.com/FlameStorm/MopaBarcodeBundle",
     "authors": [
         {
             "name": "Philipp A. Mohrenweiser",
