@@ -1,6 +1,7 @@
 <?php
 namespace Mopa\Bundle\BarcodeBundle\Controller;
 
+use Mopa\Bundle\BarcodeBundle\Model\BarcodeService;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,6 +66,7 @@ class BarcodeController extends ContainerAware
      * @return Response
      */
     public function displayBarcodeAction($type, $enctext){
+        /** @var BarcodeService $bservice */
         $bservice = $this->container->get('mopa_barcode.barcode_service');
         return new Response(
             file_get_contents($file = $bservice->get($type, $enctext, true)),
@@ -87,6 +89,7 @@ class BarcodeController extends ContainerAware
      */
     public function downloadBarcodeAction($type, $level = 0, $size = 3, $margin = 4, $useOverlay = false, $enctext)
     {
+        /** @var BarcodeService $bservice */
         $bservice = $this->container->get('mopa_barcode.barcode_service');
 
         $options = array(
