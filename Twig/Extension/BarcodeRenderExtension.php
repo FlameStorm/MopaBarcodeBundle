@@ -18,7 +18,7 @@ use Mopa\Bundle\BarcodeBundle\Model\BarcodeService;
  */
 class BarcodeRenderExtension extends \Twig_Extension
 {
-
+    /** @var BarcodeService */
     protected $bs;
 
     /**
