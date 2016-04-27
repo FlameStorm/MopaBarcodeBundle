@@ -16,7 +16,7 @@
             <argument>%kernel.cache_dir%</argument>
             <argument>%kernel.root_dir%</argument>
             <argument>cache/barcodes/</argument>
-            <argument>%imagine.web_root%</argument>
+            <argument>%kernel.root_dir%/../web</argument>
             <argument type="service" id="logger" />
             <tag name="monolog.logger" channel="mopa_barcode" />
             <call method="setOverlayPath">
