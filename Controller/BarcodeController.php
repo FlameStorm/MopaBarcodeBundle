@@ -61,15 +61,17 @@ class BarcodeController extends ContainerAware
     /**
      * This might be used to render barcodes dynamically
      * Careful to expose this on the web, maybe others could use your site just to generate and display barcodes
-     * @param $type
-     * @param $enctext
+     *
+     * @param string $type
+     * @param string $enctext
+     * @param array $options
      * @return Response
      */
-    public function displayBarcodeAction($type, $enctext){
+    public function displayBarcodeAction($type, $enctext, $options = array()){
         /** @var BarcodeService $bservice */
         $bservice = $this->container->get('mopa_barcode.barcode_service');
         return new Response(
-            file_get_contents($file = $bservice->get($type, $enctext, true)),
+            file_get_contents($file = $bservice->get($type, $enctext, true, $options)),
             200,
             array(
                 'Content-Type'          => 'image/png',
@@ -79,12 +81,12 @@ class BarcodeController extends ContainerAware
     }
 
     /**
-     * @param $type
+     * @param string $type
      * @param int $level
      * @param int $size
      * @param int $margin
      * @param bool $useOverlay
-     * @param $enctext
+     * @param string $enctext
      * @return Response
      */
     public function downloadBarcodeAction($type, $level = 0, $size = 3, $margin = 4, $useOverlay = false, $enctext)
