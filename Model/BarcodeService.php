@@ -5,6 +5,8 @@ use Monolog\Logger;
 use Imagine\Gd\Image;
 use Imagine\Image\ImagineInterface;
 use Imagine\Image\Box;
+use Imagine\Image\Metadata\MetadataBag;
+use Imagine\Image\Palette\RGB as RGBColor; //PaletteInterface
 use Zend\Barcode\Barcode;
 
 /**
@@ -100,11 +102,10 @@ class BarcodeService{
                 $rendererOptions = isset($options['rendererOptions']) ? $options['rendererOptions'] : array();
                 $rendererOptions['width'] = isset($rendererOptions['width']) ? $rendererOptions['width'] : 2233;
                 $rendererOptions['height'] = isset($rendererOptions['height']) ? $rendererOptions['height'] : 649;
-                $image = new Image(
-                    $imageResource = Barcode::factory(
-                        $type, 'image', $barcodeOptions, $rendererOptions
-                    )->draw()
-                , null, null);
+                $palette = new RGBColor();
+                $metaData = new MetadataBag();
+                $imageResource = Barcode::factory($type, 'image', $barcodeOptions, $rendererOptions)->draw();
+                $image = new Image($imageResource, $palette, $metaData);
                 $image->save($file);
         }
         return true;
@@ -126,7 +127,9 @@ class BarcodeService{
             $destination = imagecreatefrompng($file);
             $src = imagecreatefrompng($overlayImagePath);
 
-            $overlayImage = new Image($src, null, null);
+            $palette = new RGBColor();
+            $metaData = new MetadataBag();
+            $overlayImage = new Image($src, $palette, $metaData);
             $overlayImage->resize(new Box($width, $width));
             $tmpFilePath = $this->kernelcachedir . DIRECTORY_SEPARATOR . sha1(time() . rand()) . '.png';
             $overlayImage->save($tmpFilePath);
